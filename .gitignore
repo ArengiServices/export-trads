@@ -5,3 +5,8 @@ functions/__pycache__
 
 .env
 .env.local
+csv/
+zips/
+traductions.xlsx
+myenv
+extracted_xliff/*

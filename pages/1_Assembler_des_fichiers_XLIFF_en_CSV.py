@@ -17,6 +17,9 @@ st.title('Assembler des fichiers XLIFF en un fichier CSV')
 # Téléverser un fichier ZIP contenant les fichiers XLIFF
 zip_file = st.file_uploader('Téléverser un fichier ZIP contenant les fichiers XLIFF :', type='zip')
 if zip_file:
+    zip_filename = zip_file.name
+    csv_filename = os.path.splitext(zip_filename)[0] + '.csv'
+
     # Extraire les fichiers XLIFF du fichier ZIP
     with ZipFile(zip_file, 'r') as zip_ref:
         zip_ref.extractall()
@@ -53,7 +56,7 @@ if zip_file:
     # Télécharger le fichier CSV
     csv = df.to_csv(index=False)
     b64 = base64.b64encode(csv.encode()).decode()
-    href = f'<a href="data:file/csv;base64,{b64}" download="output.csv">Télécharger le fichier CSV</a>'
+    href = f'<a href="data:file/csv;base64,{b64}" download="{csv_filename}">Télécharger le fichier CSV</a>'
     st.markdown(href, unsafe_allow_html=True)
     
     # Afficher le DataFrame
